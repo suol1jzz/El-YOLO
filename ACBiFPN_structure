@@ -1,0 +1,25 @@
+digraph ACBiFPN {
+	X1 [label="Input Feature 1" fillcolor=lightblue shape=rect style=filled]
+	X2 [label="Input Feature 2" fillcolor=lightblue shape=rect style=filled]
+	X3 [label="Input Feature 3" fillcolor=lightblue shape=rect style=filled]
+	W [label="Learnable Weights (w)" fillcolor=lightgray shape=ellipse style=filled]
+	Norm [label="Weight Normalization" fillcolor=yellow shape=parallelogram style=filled]
+	Weighted1 [label="X1 * w1" fillcolor=lightgreen shape=rect style=filled]
+	Weighted2 [label="X2 * w2" fillcolor=lightgreen shape=rect style=filled]
+	Weighted3 [label="X3 * w3" fillcolor=lightgreen shape=rect style=filled]
+	Concat [label=Concatenation fillcolor=orange shape=parallelogram style=filled]
+	Conv [label="1x1 Conv (Channel Compression)" fillcolor=red shape=rect style=filled]
+	Output [label="Fused Output" fillcolor=lightblue shape=rect style=filled]
+	W -> Norm
+	Norm -> Weighted1
+	Norm -> Weighted2
+	Norm -> Weighted3
+	X1 -> Weighted1
+	X2 -> Weighted2
+	X3 -> Weighted3
+	Weighted1 -> Concat
+	Weighted2 -> Concat
+	Weighted3 -> Concat
+	Concat -> Conv
+	Conv -> Output
+}

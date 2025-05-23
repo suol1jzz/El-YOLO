@@ -1,0 +1,26 @@
+digraph {
+	I1 [label="Input 1
+(Higher Level)" fillcolor=lightblue shape=ellipse style=filled]
+	I2 [label="Input 2
+(Same Level)" fillcolor=lightblue shape=ellipse style=filled]
+	I3 [label="Input 3
+(Lower Level)" fillcolor=lightblue shape=ellipse style=filled]
+	C1 [label="Conv(1x1) + ReLU" fillcolor=lightgray shape=box style=filled]
+	C2 [label="Conv(1x1) + ReLU" fillcolor=lightgray shape=box style=filled]
+	C3 [label="Conv(1x1) + ReLU" fillcolor=lightgray shape=box style=filled]
+	Concat [label="Concat + Fusion Conv(1x1)" fillcolor=orange shape=box style=filled]
+	Softmax [label="Softmax Weights" fillcolor=yellow shape=box style=filled]
+	WeightedSum [label="Weighted Sum
+Σ(inputs[i] * weights[i])" fillcolor=lightgreen shape=parallelogram style=filled]
+	Out [label="Conv(3x3) + BN + ReLU
+Final Output" fillcolor=lightblue shape=box style=filled]
+	I1 -> C1
+	I2 -> C2
+	I3 -> C3
+	C1 -> Concat
+	C2 -> Concat
+	C3 -> Concat
+	Concat -> Softmax
+	Softmax -> WeightedSum
+	WeightedSum -> Out
+}

@@ -1,0 +1,19 @@
+// ACBiFPN Module Flow
+digraph {
+	nodesep=0.5 rankdir=TB
+	Init [label="初始化模块
+(参数/权重/Conv)" fillcolor="#E0F2F7" fontsize=12 shape=rectangle style="rounded,filled"]
+	"Input Check" [label="输入校验
+(2/3个特征图)" fillcolor="#E0F2F7" fontsize=12 shape=rectangle style="rounded,filled"]
+	"Feature Fusion" [label="特征融合
+(加权/拼接)" fillcolor="#E0F2F7" fontsize=12 shape=rectangle style="rounded,filled"]
+	"Channel Compress" [label="通道压缩
+(Conv层)" fillcolor="#E0F2F7" fontsize=12 shape=rectangle style="rounded,filled"]
+	Output [label="输出结果" fillcolor="#E0F2F7" fontsize=12 shape=rectangle style="rounded,filled"]
+	Init -> "Input Check"
+	"Input Check" -> "Feature Fusion"
+	"Feature Fusion" -> "Channel Compress"
+	"Channel Compress" -> Output
+	"Input Check" -> Output [label="非法输入
+→ 异常" color=red fontcolor=red style=dashed]
+}
